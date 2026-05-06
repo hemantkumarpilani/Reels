@@ -1,6 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
       android:name=".MainApplication"
@@ -8,9 +13,27 @@
       android:icon="@mipmap/ic_launcher"
       android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
+       android:largeHeap="true" 
+      android:hardwareAccelerated="true"
       android:theme="@style/AppTheme"
       android:usesCleartextTraffic="${usesCleartextTraffic}"
       android:supportsRtl="true">
+       <!-- Facebook Setup here -->
+       <activity android:name="com.facebook.FacebookActivity"
+        android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+        android:label="@string/app_name" />
+       <activity
+          android:name="com.facebook.CustomTabActivity"
+          android:exported="true">
+         <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="@string/fb_login_protocol_scheme" />
+          </intent-filter>
+       </activity>
+        <!-- Facebook Setup here -->
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
@@ -23,5 +46,10 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+
+       <!-- Facebook Setup here -->
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="2476755046129533"/>
+   	    <meta-data android:name="com.facebook.sdk.ClientToken" android:value="478551b21c25640c1b75c3c4f3dd31e6"/>
+      <!-- Facebook Setup here -->
     </application>
 </manifest>
