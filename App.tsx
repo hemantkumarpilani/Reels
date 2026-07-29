@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { persistor, store } from './src/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import Config from 'react-native-config';
+import Toast from 'react-native-toast-message';
 
 const giphyapikey = Config.GIPHY_API_KEY;
 console.log('giphyapikey', giphyapikey);
@@ -31,6 +32,7 @@ const App = () => {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Navigation />
+          <Toast />
         </PersistGate>
       </Provider>
     </GestureHandlerRootView>

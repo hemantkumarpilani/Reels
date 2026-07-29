@@ -6,7 +6,7 @@ import Config from 'react-native-config';
 export const BASE_URL =
   Platform.OS === 'android'
     ? 'http://10.0.2.2:3000'
-    : 'http://192.168.1.7:3000';
+    : 'http://192.168.1.3:3000';
 
 // RUNNING ON REAL DEVICE USE YOUR NETWORK IP TO ACCESS ON REAL DEVICE
 //eg http://192.168.29.88:3000

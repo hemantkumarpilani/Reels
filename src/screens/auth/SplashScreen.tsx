@@ -1,13 +1,63 @@
-import { View, Text, StyleSheet, Animated } from 'react-native';
+import { View, Text, StyleSheet, Animated, Alert } from 'react-native';
 import React, { FC, useEffect, useState } from 'react';
 import { Colors } from '../../constants/Colors';
 import Logo from '../../assets/images/logo_t.png';
 import CustomText from '../../components/global/CustomText';
 import { FONTS } from '../../constants/Fonts';
+import { token_storage } from '../../redux/storage';
+import { jwtDecode } from 'jwt-decode';
+import { resetAndNavigate } from '../../utils/NavigationUtil';
+import { showToast } from '../../utils/ToastMessage';
+import { refresh_tokenn } from '../../redux/apiConfig';
+import { useAppDispatch } from '../../redux/reduxHook';
+import { refetchUser } from '../../redux/actions/userAction';
+
+interface DecodedToken {
+  exp: number;
+}
 
 const SplashScreen: FC = () => {
   const [isStop, setIsStop] = useState(false);
   const scale = new Animated.Value(1);
+  const dispatch = useAppDispatch();
+
+  const tokenCheck = async () => {
+    const access_token = token_storage.getString('access_token') as string;
+    const refresh_token = token_storage.getString('refresh_token') as string;
+
+    if (access_token) {
+      const decodedAccessToken = jwtDecode<DecodedToken>(access_token);
+      const decodedRefreshToken = jwtDecode<DecodedToken>(refresh_token);
+      const currentTime = Date.now() / 1000;
+
+      if (decodedRefreshToken?.exp < currentTime) {
+        resetAndNavigate('LoginScreen');
+        showToast('error', 'Session expired, please login again');
+      }
+
+      if (decodedAccessToken?.exp < currentTime) {
+        try {
+          refresh_tokenn();
+          dispatch(refetchUser());
+        } catch (error) {
+          console.log('error of decoded accesstoken expiry', error);
+          Alert.alert('Error', 'An error occurred while checking the token.');
+          return;
+        }
+      }
+      resetAndNavigate('BottomTab');
+      return;
+    }
+    resetAndNavigate('LoginScreen');
+  };
+
+  useEffect(() => {
+    const deeplinks = async () => {
+      await tokenCheck();
+    };
+
+    deeplinks();
+  });
 
   useEffect(() => {
     const breathingAnimation = Animated.loop(
@@ -46,7 +96,7 @@ const SplashScreen: FC = () => {
           }}
         />
         <CustomText variant="h3" fontFamily={FONTS.Reelz}>
-          Reels @Hemant
+          Reels
         </CustomText>
       </View>
     </View>

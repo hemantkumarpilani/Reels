@@ -1,4 +1,5 @@
 import UIKit
+import FBSDKCoreKit
 import React
 import React_RCTAppDelegate
 import ReactAppDependencyProvider
