@@ -1,3 +1,4 @@
+import UploadReelScreen from '../components/reel/UploadReelScreen';
 import LoginScreen from '../screens/auth/LoginScreen';
 import RegisterScreen from '../screens/auth/RegisterScreen';
 import SplashScreen from '../screens/auth/SplashScreen';
@@ -28,6 +29,10 @@ export const dashboardStack = [
   {
     name: 'PickReelScreen',
     component: PickReelScreen,
+  },
+  {
+    name: 'UploadReelScreen',
+    component: UploadReelScreen,
   },
 ];
 

@@ -25,6 +25,13 @@ export const resetAndNavigate = async (routeName: string) => {
   }
 };
 
+export async function goBack() {
+  await navigationRef.isReady();
+  if (navigationRef.isReady()) {
+    navigationRef.dispatch(CommonActions.goBack());
+  }
+}
+
 export const push = async (routeName: string, params?: object) => {
   await navigationRef.isReady();
   if (navigationRef.isReady()) {

@@ -34,45 +34,77 @@ const GradientButton: FC<{
           >
             {text}
           </CustomText>
+          <Icon
+            name={iconName ? iconName : 'wallet-giftcard'}
+            style={styles.icon}
+            size={RFValue(16)}
+          />
         </View>
-        <Icon
-          name={iconName ? iconName : 'wallet-giftcard'}
-          style={styles.icon}
-          size={RFValue(16)}
-        />
       </LinearGradient>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
+  // gradientButtonContainer: {
+  //   width: '70%',
+  //   height: 45,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   margin: 20,
+  //   overflow: 'hidden',
+  // },
+  // gradientButton: {
+  //   borderRadius: 20,
+  //   padding: 8,
+  //   width: '100%',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  // },
+  // innerButton: {
+  //   flexDirection: 'row',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   width: '100%',
+  // },
+  // text: {
+  //   color: Colors.white,
+  //   marginRight: 5,
+  // },
+  // icon: {
+  //   color: Colors.white,
+  // },
+
   gradientButtonContainer: {
     width: '70%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 20,
-    overflow: 'hidden',
+    height: 45,
+    marginTop: 20,
+    borderRadius: 22.5,
   },
+
   gradientButton: {
-    borderRadius: 20,
-    padding: 8,
+    flex: 1,
     width: '100%',
+    borderRadius: 22.5,
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   innerButton: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
   },
+
   text: {
     color: Colors.white,
-    marginRight: 5,
+    marginRight: 6,
   },
+
   icon: {
     color: Colors.white,
   },
+
   skeletonLoader: {
     ...StyleSheet.absoluteFill,
     borderRadius: 20,
